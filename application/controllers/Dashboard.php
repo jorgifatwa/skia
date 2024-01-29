@@ -30,7 +30,7 @@ class Dashboard extends Admin_Controller {
 			'YEAR(tanggal_keberangkatan)' => $currentYear
 		));
 		$total = 0;
-		if(isset($transaksi)){
+		if(!empty($transaksi)){
 			foreach ($transaksi as $key => $value) {
 				$total += $value->harga * $value->jumlah_pax;
 			}
@@ -39,7 +39,7 @@ class Dashboard extends Admin_Controller {
 		$pengeluaran = $this->pengeluaran_model->getAllById(array('MONTH(tanggal)' => $currentMonth,
 		'YEAR(tanggal)' => $currentYear));
 		$total_pengeluaran = 0;
-		if(isset($pengeluaran)){
+		if(!empty($pengeluaran)){
 			foreach ($pengeluaran as $key => $value) {
 				$total_pengeluaran += $value->harga * $value->jumlah;
 			}
@@ -49,7 +49,7 @@ class Dashboard extends Admin_Controller {
 		'YEAR(tanggal)' => $currentYear, 'status' => 'Lunas'));
 
 		$total_biaya_tambahan = 0;
-		if(isset($biaya_tambahan)){
+		if(!empty($biaya_tambahan)){
 			foreach ($biaya_tambahan as $key => $value) {
 				$total_biaya_tambahan += $value->harga * $value->jumlah;
 			}
