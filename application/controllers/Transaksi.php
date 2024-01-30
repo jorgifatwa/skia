@@ -35,6 +35,7 @@ class Transaksi extends Admin_Controller
 		$this->form_validation->set_rules('jumlah_pax', "Jumlah Pax Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('status', "Status Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('flight', "Flight Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('fee_tl', "Fee TL Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('keterangan_tambahan', "Keterangan Harus Diisi", 'trim|required');
 
 		if ($this->form_validation->run() === TRUE) {
@@ -45,6 +46,7 @@ class Transaksi extends Admin_Controller
 				'harga' => str_replace('.', '', $this->input->post('harga')),
 				'jumlah_pax' => str_replace('.', '', $this->input->post('jumlah_pax')),
 				'status' => $this->input->post('status'),
+				'fee_tl' => str_replace('.', '', $this->input->post('fee_tl')),
 				'keterangan' => $this->input->post('flight'),
 				'keterangan_tambahan' => $this->input->post('keterangan_tambahan'),
 				'created_at' => date('Y-m-d H:i:s'),
@@ -76,6 +78,7 @@ class Transaksi extends Admin_Controller
 		$this->form_validation->set_rules('jumlah_pax', "Jumlah Pax Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('status', "Status Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('flight', "Flight Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('fee_tl', "Fee TL Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('keterangan_tambahan', "Keterangan Harus Diisi", 'trim|required');
 
 
@@ -89,6 +92,7 @@ class Transaksi extends Admin_Controller
 				'harga' => str_replace('.', '', $this->input->post('harga')),
 				'jumlah_pax' => str_replace('.', '', $this->input->post('jumlah_pax')),
 				'status' => $this->input->post('status'),
+				'fee_tl' => str_replace('.', '', $this->input->post('fee_tl')),
 				'keterangan' => $this->input->post('flight'),
 				'keterangan_tambahan' => $this->input->post('keterangan_tambahan'),
 				'updated_at' => date('Y-m-d H:i:s'),
@@ -121,6 +125,7 @@ class Transaksi extends Admin_Controller
 				$this->data['travel_id'] 	= (!empty($transaksi)) ? $transaksi[0]->travel_id : "";
 				$this->data['harga'] 	= (!empty($transaksi)) ? $transaksi[0]->harga : "";
 				$this->data['jumlah_pax'] 	= (!empty($transaksi)) ? $transaksi[0]->jumlah_pax : "";
+				$this->data['fee_tl'] 	= (!empty($transaksi)) ? $transaksi[0]->fee_tl : "";
 				$this->data['keterangan'] 	= (!empty($transaksi)) ? $transaksi[0]->keterangan : "";
 				$this->data['keterangan_tambahan'] 	= (!empty($transaksi)) ? $transaksi[0]->keterangan_tambahan : "";
 				$this->data['status'] 	= (!empty($transaksi)) ? $transaksi[0]->status : "";
@@ -187,6 +192,7 @@ class Transaksi extends Admin_Controller
 				$this->data['travel_id'] 	= (!empty($transaksi)) ? $transaksi[0]->travel_id : "";
 				$this->data['harga'] 	= (!empty($transaksi)) ? $transaksi[0]->harga : "";
 				$this->data['jumlah_pax'] 	= (!empty($transaksi)) ? $transaksi[0]->jumlah_pax : "";
+				$this->data['fee_tl'] 	= (!empty($transaksi)) ? $transaksi[0]->fee_tl : "";
 				$this->data['keterangan'] 	= (!empty($transaksi)) ? $transaksi[0]->keterangan : "";
 				$this->data['keterangan_tambahan'] 	= (!empty($transaksi)) ? $transaksi[0]->keterangan_tambahan : "";
 				$this->data['status'] 	= (!empty($transaksi)) ? $transaksi[0]->status : "";

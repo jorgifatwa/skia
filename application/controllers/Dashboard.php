@@ -32,7 +32,7 @@ class Dashboard extends Admin_Controller {
 		$total = 0;
 		if(!empty($transaksi)){
 			foreach ($transaksi as $key => $value) {
-				$total += $value->harga * $value->jumlah_pax;
+				$total += ($value->harga * $value->jumlah_pax) - $value->fee_tl;
 			}
 		}
 
@@ -74,7 +74,7 @@ class Dashboard extends Admin_Controller {
 		for ($month = 1; $month <= 12; $month++) {
 			// Calculate total income for the current month and year
 			$totalPendapatanQuery = $this->db->query("
-				SELECT SUM(harga * jumlah_pax) AS total_pendapatan
+				SELECT SUM((harga * jumlah_pax) - fee_tl) AS total_pendapatan
 				FROM transaksi
 				WHERE status = 0
 				AND MONTH(tanggal_keberangkatan) = $month
@@ -148,7 +148,7 @@ class Dashboard extends Admin_Controller {
 		for ($year = $currentYear - 3; $year <= $currentYear; $year++) {
 			// Calculate total income for the current year
 			$totalPendapatanQuery = $this->db->query("
-				SELECT SUM(harga * jumlah_pax) AS total_pendapatan
+				SELECT SUM((harga * jumlah_pax) - fee_tl)  AS total_pendapatan
 				FROM transaksi
 				WHERE status = 0
 				AND YEAR(tanggal_keberangkatan) = $year

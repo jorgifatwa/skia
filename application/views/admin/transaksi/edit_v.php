@@ -74,7 +74,13 @@
                     <div class="form-group row">
                         <label class="form-label col-sm-3" for="">Flight</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="flight" name="flight" autocomplete="off" placeholder="Flight" value="<?php echo $keterangan ?>">
+                            <input class="form-control" type="text" id="flight" name="flight" autocomplete="off" placeholder="Flight" value="<?php echo $keterangan ?>" placeholder="Flight" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-label col-sm-3" for="">Fee TL</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="fee_tl" name="fee_tl" autocomplete="off" placeholder="Flight" value="<?php echo $fee_tl ?>" placeholder="Fee TL" >
                         </div>
                     </div>
                     <div class="form-group row">

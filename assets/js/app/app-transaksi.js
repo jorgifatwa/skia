@@ -42,10 +42,16 @@ define([
 
             var harga = $('#harga').val();
             var jumlah_pax = $('#jumlah_pax').val();
+            var fee_tl = $('#fee_tl').val();
 
             if(harga){
                 var value_harga = formatRupiah($('#harga').val());
                 $('#harga').val(value_harga);
+            }
+
+            if(fee_tl){
+                var value_harga = formatRupiah($('#fee_tl').val());
+                $('#fee_tl').val(value_harga);
             }
             
             if(jumlah_pax){
@@ -155,6 +161,11 @@ define([
                 $(this).val(value);
             });
 
+            $('#fee_tl').keyup(function (event) {
+                var value = formatRupiah($(this).val());
+                $(this).val(value);
+            });
+
             function getNumericValue(inputText) {
                 let result = inputText.replace(/[^\d]/g, ''); // Remove everything except digits
                 let integerValue = parseFloat(result); // Convert the result to an integer
@@ -194,6 +205,9 @@ define([
                         jumlah: {
                             required: true
                         },
+                        fee_tl: {
+                            required: true
+                        },
                         keterangan: {
                             required: true
                         },
@@ -210,6 +224,9 @@ define([
                         },
                         harga: {
                             required: "Harga Harus Diisi"
+                        },
+                        fee_tl: {
+                            required: "Fee TL Harus Diisi"
                         },
                         jumlah: {
                             required: "Jumlah Harus Diisi"

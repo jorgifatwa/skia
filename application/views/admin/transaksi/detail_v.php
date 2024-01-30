@@ -154,12 +154,12 @@
                 } 
               } 
               ?>
-              <?php if($jumlah_pax >= 40){ ?>
+              <?php if($fee_tl > 0){ ?>
               <tr>
                 <td colspan="5"><b>FEE TL</b></td>
-                <td><?php echo "- Rp. ".number_format($total_fee) ?></td>
+                <td><?php echo "- Rp. ".number_format($fee_tl) ?></td>
               </tr>
-              <?php $total_keseluruhan = ($sum + $total) - $total_fee; }else{ $total_keseluruhan = ($sum + $total);  } ?>
+              <?php $total_keseluruhan = ($sum + $total) - $fee_tl; }else{ $total_keseluruhan = ($sum + $total);  } ?>
 
               <tr>
                 <td colspan="5"><b>TOTAL</b></td>
