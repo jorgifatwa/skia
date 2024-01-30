@@ -117,8 +117,15 @@ define([
             var totalPendapatanArray = grafikArray.map(function (item) {
                 return parseInt(item.total_pendapatan);
             });
+            var totalBersihArray = grafikArray.map(function (item) {
+                return parseInt(item.total_bersih);
+            });
             var totalPengeluaranArray = grafikArray.map(function (item) {
                 return parseInt(item.total_pengeluaran);
+            });
+
+            var totalPengeluaranKaryawanArray = grafikArray.map(function (item) {
+                return parseInt(item.total_pengeluaran_karyawan);
             });
 
             Highcharts.chart('container-grafik-pendapatan', {
@@ -167,9 +174,15 @@ define([
                 },
             
                 series: [{
-                    name: tahun,
+                    name: 'Total Pendapatan Kotor',
                     data: totalPendapatanArray,
                     pointStart: 0,
+                }, 
+                {
+                    name: 'Total Pendapatan Bersih',
+                    data: totalBersihArray,
+                    pointStart: 0,
+                    color: 'green'
                 }]
             });
 
@@ -178,7 +191,7 @@ define([
                     type: 'column'
                 },
                 title: {
-                    text: 'Pendapatan Kotor Perbulan'
+                    text: 'Pengeluaran Operasional / UOB Perbulan'
                 },
                 subtitle: {
                     text: 'SKIA'
@@ -204,7 +217,7 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor'
+                        text: 'Jumlah Pengeluaran Operasional / UOB'
                     }
                 },
                 plotOptions: {
@@ -215,12 +228,64 @@ define([
             
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pendapatan = {point.y}'
+                    pointFormat: 'Pengeluaran = {point.y}'
                 },
             
                 series: [{
-                    name: new Date().getFullYear(),
+                    name: 'Total Pengeluaran Operasional / UOB',
                     data: totalPengeluaranArray,
+                    pointStart: 0,
+                }]
+            });
+
+            Highcharts.chart('container-grafik-pengeluaran-karyawan', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Pengeluaran Karyawan Perbulan'
+                },
+                subtitle: {
+                    text: 'SKIA'
+                },
+
+                xAxis: {
+                    categories: [
+                        'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Jumlah Pengeluaran Karyawan'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+            
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br />',
+                    pointFormat: 'Pengeluaran = {point.y}'
+                },
+            
+                series: [{
+                    name: 'Total Pengeluaran Karyawan',
+                    data: totalPengeluaranKaryawanArray,
                     pointStart: 0,
                 }]
             });
@@ -236,6 +301,10 @@ define([
             // Accessing total_pendapatan array for each year
             var totalPendapatanArray = grafikArray.map(function(item) {
                 return parseInt(item.total_pendapatan);
+            });
+
+            var totalPendapatanBersihArray = grafikArray.map(function(item) {
+                return parseInt(item.total_bersih);
             });
         
             Highcharts.chart('container-grafik-pendapatan-pertahun', {
@@ -270,11 +339,19 @@ define([
                     pointFormat: 'Pendapatan = {point.y}'
                 },
         
-                series: [{
-                    name: 'Pendapatan', // You can customize the series name
-                    data: totalPendapatanArray,
-                    pointStart: 0
-                }]
+                series: [
+                    {
+                        name: 'Total Pendapatan Kotor', // You can customize the series name
+                        data: totalPendapatanArray,
+                        pointStart: 0
+                    },
+                    {
+                        name: 'Total Pendapatan Bersih', // You can customize the series name
+                        data: totalPendapatanBersihArray,
+                        pointStart: 0,
+                        color: 'green'
+                    }
+                ]
             });
         },
 
@@ -342,7 +419,7 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor'
+                        text: 'Jumlah Travel Keberangkatan'
                     }
                 },
                 plotOptions: {
@@ -353,7 +430,7 @@ define([
         
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pendapatan = {point.y}'
+                    pointFormat: 'Jumlah = {point.y}'
                 },
         
                 // Use the seriesData array to populate the series
