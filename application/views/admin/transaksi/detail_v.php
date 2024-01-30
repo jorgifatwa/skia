@@ -205,10 +205,10 @@
   <div class="row p-4">
     <div class="col-md-12 text-right">
       <?php if($key_status == 1){ ?>
-      <button class="btn btn-success btn-lunas mr-4" url="<?php echo base_url('transaksi/update_status/'.$this->uri->segment(3)) ?>" data-status="0"><i class="fa fa-check"></i> Lunaskan</a>
-      <?php } ?>
-      <button class="btn btn-danger mr-4" onclick="exportToPdf()"><i class="fa fa-file"></i> Export to PDF</a>
-      <button class="btn btn-primary" data-toggle="modal" data-target="#biaya_tambahan_modal"><i class="fa fa-plus"></i> Biaya Tambahan</a>
+        <button class="btn btn-success btn-lunas mr-4" url="<?php echo base_url('transaksi/update_status/'.$this->uri->segment(3)) ?>" data-status="0"><i class="fa fa-check"></i> Lunaskan</a>
+        <button class="btn btn-primary mr-4" data-toggle="modal" data-target="#biaya_tambahan_modal"><i class="fa fa-plus"></i> Biaya Tambahan</a>
+        <?php } ?>
+        <button class="btn btn-danger m-0" onclick="exportToPdf()"><i class="fa fa-file"></i> Export to PDF</a>
     </div>
   </div>
 </section>

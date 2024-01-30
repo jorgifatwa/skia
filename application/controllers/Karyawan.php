@@ -26,7 +26,6 @@ class Karyawan extends Admin_Controller
 	{
 		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('email', "Email Harus Diisi", 'trim|required');
-		$this->form_validation->set_rules('password', "Password Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('no_hp', "No. HP Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('alamat', "Alamat Harus Diisi", 'trim|required');
 
@@ -43,7 +42,7 @@ class Karyawan extends Admin_Controller
 
 			$insert = $this->karyawan_model->insert($data);
 
-			if ($insert && $insert_user) {
+			if ($insert) {
 				$this->session->set_flashdata('message', "Karyawan Baru Berhasil Disimpan");
 				redirect("karyawan");
 			} else {
