@@ -76,7 +76,7 @@ class Dashboard extends Admin_Controller {
 		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan);
 		$this->data['total_pengeluaran'] = "Rp. ".number_format($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan);
 		$this->data['total_pengeluaran_karyawan'] = "Rp. ".number_format($total_pengeluaran_karaywan);
-		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan + $total_biaya_tambahan_kotor) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
+		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
 
 
 		$this->load->view('admin/layouts/page', $this->data);
