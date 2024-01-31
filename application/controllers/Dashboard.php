@@ -65,7 +65,6 @@ class Dashboard extends Admin_Controller {
 		if(!empty($biaya_tambahan)){
 			foreach ($biaya_tambahan as $key => $value) {
 				if($value->fee == 0){
-
 					$total_biaya_tambahan += $value->harga * $value->jumlah;
 				}else{
 					$total_biaya_tambahan += $value->fee;
@@ -93,7 +92,7 @@ class Dashboard extends Admin_Controller {
 		for ($month = 1; $month <= 12; $month++) {
 			// Calculate total income for the current month and year
 			$totalPendapatanQuery = $this->db->query("
-				SELECT SUM(harga * jumlah_pax) AS total_pendapatan, SUM(fee_tl) as total_fee
+				SELECT SUM(harga * jumlah_pax) AS total_pendapatan, SUM(fee_tl) as total_fee, SUM(jumlah_pax) as total_jumlah
 				FROM transaksi
 				WHERE status = 0
 				AND is_deleted = 0
@@ -104,6 +103,7 @@ class Dashboard extends Admin_Controller {
 			$totalPendapatanResult = $totalPendapatanQuery->row();
 			$totalPendapatan = $totalPendapatanResult->total_pendapatan;
 			$totalFeeTl = $totalPendapatanResult->total_fee;;
+			$totalJumlahPax = $totalPendapatanResult->total_jumlah;;
 
 			// Calculate total expenditure for the current month and year
 			$totalPengeluaranQuery = $this->db->query("
@@ -129,15 +129,6 @@ class Dashboard extends Admin_Controller {
 			$totalPengeluaranKaryawan = $totalPengeluaranKaryawanResult->total_pengeluaran_karyawan;
 
 			// Calculate total income for the current month and year
-			$totalBiayaQuery = $this->db->query("
-				SELECT SUM(fee) AS total_pendapatan, SUM(harga * jumlah) AS total_pendapatan_kotor
-				FROM biaya_tambahan
-				WHERE status = 'Lunas'
-				AND is_deleted = 0
-				AND MONTH(tanggal) = $month
-				AND YEAR(tanggal) = $currentYear
-			");
-
 			$biaya_tambahan = $this->biaya_tambahan_model->getAllById(array('MONTH(tanggal)' => $month,
 			'YEAR(tanggal)' => $currentYear, 'status' => 'Lunas'));
 			$totalBiaya = 0;
@@ -161,6 +152,7 @@ class Dashboard extends Admin_Controller {
 				'total_pengeluaran' => $totalPengeluaran,
 				'total_pengeluaran_karyawan' => $totalPengeluaranKaryawan,
 				'total_bersih' => $totalBersih,
+				'total_jumlah' => $totalJumlahPax,
 			];
 
 	
@@ -225,16 +217,17 @@ class Dashboard extends Admin_Controller {
 			$totalPengeluaranKaryawanResult = $totalPengeluaranKaryawanQuery->row();
 			$totalPengeluaranKaryawan = $totalPengeluaranKaryawanResult->total_pengeluaran_karyawan;
 
-			$totalBiayaQuery = $this->db->query("
-				SELECT SUM(harga * jumlah) AS total_pendapatan
-				FROM biaya_tambahan
-				WHERE status = 'Lunas'
-				AND is_deleted = 0
-				AND YEAR(tanggal) = $currentYear
-			");
-
-			$totalBiayaResult = $totalBiayaQuery->row();
-			$totalBiaya = $totalBiayaResult->total_pendapatan;
+			$biaya_tambahan = $this->biaya_tambahan_model->getAllById(array('YEAR(tanggal)' => $year, 'status' => 'Lunas'));
+			$totalBiaya = 0;
+			if(!empty($biaya_tambahan)){
+				foreach ($biaya_tambahan as $key => $value) {
+					if($value->fee == 0){
+						$totalBiaya += $value->harga * $value->jumlah;
+					}else{
+						$totalBiaya += $value->fee;
+					}
+				}
+			}
 
 			$totalPendapatan = $totalPendapatan + $totalBiaya;
 			// Calculate net income for the current year
@@ -269,7 +262,7 @@ class Dashboard extends Admin_Controller {
 		// Get unique travel_id values along with their names from the 'travel' table
 		$travelData = $this->db->query("
 			SELECT id, nama
-			FROM travel
+			FROM travel WHERE is_deleted = 0
 		")->result_array();
 	
 		// Initialize an array to store monthly data for each travel_id
@@ -286,6 +279,7 @@ class Dashboard extends Admin_Controller {
 					SELECT COUNT(*) AS transaction_count
 					FROM transaksi t
 					WHERE t.status = 0
+					AND t.is_deleted = 0
 					AND MONTH(t.tanggal_keberangkatan) = $month
 					AND YEAR(t.tanggal_keberangkatan) = $currentYear
 					AND t.travel_id = $travelId
@@ -297,6 +291,59 @@ class Dashboard extends Admin_Controller {
 				// Store the transaction count for the current month and travel_id in the array
 				$monthlyData[$travel['nama']][$month] = [
 					'transaction_count' => $transactionCount,
+				];				
+			}
+		}
+	
+		if (!empty($monthlyData)) {
+			$return_data['tahun'] = $currentYear;
+			$return_data['grafik'] = $monthlyData;
+			$return_data['status'] = true;
+			$return_data['message'] = "Berhasil mengambil data!";
+		} else {
+			$return_data['data'] = [];
+			$return_data['grafik'] = [];
+			$return_data['status'] = false;
+			$return_data['message'] = "Gagal mengambil data!";
+		}
+	
+		echo json_encode($return_data);
+	}
+
+	public function grafikPengeluaranKaryawan() {
+		$currentYear = date('Y'); // Get the current year in the format 'YYYY'
+	
+		// Get unique travel_id values along with their names from the 'travel' table
+		$karywanData = $this->db->query("
+			SELECT id, nama
+			FROM karyawan WHERE is_deleted = 0
+		")->result_array();
+	
+		// Initialize an array to store monthly data for each travel_id
+		$monthlyData = [];
+	
+		// Loop through each month (from January to December)
+		for ($month = 1; $month <= 12; $month++) {
+			// Loop through each travel_id
+			foreach ($karywanData as $karywan) {
+				$karywanId = $karywan['id'];
+	
+				// Count the number of transactions for the current month, year, and travel_id
+				$pengeluaranCountQuery = $this->db->query("
+					SELECT SUM(harga) AS pengeluaran_count
+					FROM pengeluaran_karyawan p
+					WHERE p.is_deleted = 0
+					AND MONTH(p.tanggal) = $month
+					AND YEAR(p.tanggal) = $currentYear
+					AND p.karyawan_id = $karywanId
+				");
+	
+				$pengeluaranCountResult = $pengeluaranCountQuery->row();
+				$pengeluaranCount = $pengeluaranCountResult->pengeluaran_count;
+	
+				// Store the transaction count for the current month and travel_id in the array
+				$monthlyData[$karywan['nama']][$month] = [
+					'pengeluaran_count' => $pengeluaranCount,
 				];				
 			}
 		}

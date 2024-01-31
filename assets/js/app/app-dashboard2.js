@@ -66,7 +66,18 @@ define([
                 success : function(data) {
                     var data = JSON.parse(data);
                     App.grafikTravel(data.grafik);
-                    console.log('data', data)
+                },
+                error : function(data) {
+                    // do something
+                }
+            });
+
+            $.ajax({
+                url : App.baseUrl+"dashboard/grafikPengeluaranKaryawan",
+                type : "GET",
+                success : function(data) {
+                    var data = JSON.parse(data);
+                    App.grafikPengeluaranKaryawan(data.grafik);
                 },
                 error : function(data) {
                     // do something
@@ -122,6 +133,10 @@ define([
             });
             var totalPengeluaranArray = grafikArray.map(function (item) {
                 return parseInt(item.total_pengeluaran);
+            });
+
+            var totalJumlahPaxnArray = grafikArray.map(function (item) {
+                return parseInt(item.total_jumlah);
             });
 
             var totalPengeluaranKaryawanArray = grafikArray.map(function (item) {
@@ -234,6 +249,58 @@ define([
                 series: [{
                     name: 'Total Pengeluaran Operasional / UOB',
                     data: totalPengeluaranArray,
+                    pointStart: 0,
+                }]
+            });
+
+            Highcharts.chart('container-grafik-jumlah-pax', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Jumlah Pax'
+                },
+                subtitle: {
+                    text: 'SKIA'
+                },
+
+                xAxis: {
+                    categories: [
+                        'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Jumlah Pax'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+            
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br />',
+                    pointFormat: 'Jumlah = {point.y}'
+                },
+            
+                series: [{
+                    name: 'Total Jumlah Pax Keberangkatan',
+                    data: totalJumlahPaxnArray,
                     pointStart: 0,
                 }]
             });
@@ -369,8 +436,6 @@ define([
             travelIds.forEach(function (travelId) {
                 var travelInfo = travelData[travelId];
                 travelInfo = Object.values(travelInfo);
-
-                console.log(travelInfo);
         
                 // Accessing total_pendapatan array for each travel_id
                 var totalPendapatanArray = travelInfo.map(function (item) {
@@ -393,7 +458,7 @@ define([
                     type: 'column'
                 },
                 title: {
-                    text: 'Pendapatan Travel Perbulan'
+                    text: 'Total Keberangkatan Pertravel'
                 },
                 subtitle: {
                     text: 'SKIA'
@@ -431,6 +496,87 @@ define([
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
                     pointFormat: 'Jumlah = {point.y}'
+                },
+        
+                // Use the seriesData array to populate the series
+                series: seriesData
+            });
+        },
+
+        grafikPengeluaranKaryawan: function(data) {
+            // Assuming data.grafik is an object with travel_id as keys
+            var travelData = data;
+        
+            // Get unique travel_id values from the data
+            var travelIds = Object.keys(travelData);
+        
+            // Create an array to store series data
+            var seriesData = [];
+        
+            // Loop through each travel_id
+            travelIds.forEach(function (travelId) {
+                var travelInfo = travelData[travelId];
+                travelInfo = Object.values(travelInfo);
+        
+                // Accessing total_pendapatan array for each travel_id
+                var totalPendapatanArray = travelInfo.map(function (item) {
+                    return parseInt(item.pengeluaran_count);
+                });
+        
+                // Create a series object for each travel_id
+                var seriesObject = {
+                    name: travelId,
+                    data: totalPendapatanArray,
+                    pointStart: 0,
+                };
+        
+                // Push the series object to the array
+                seriesData.push(seriesObject);
+            });
+        
+            Highcharts.chart('container-grafik-pengeluaran-perkaryawan', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Total Pengeluaran Perkaryawan Perbulan'
+                },
+                subtitle: {
+                    text: 'SKIA'
+                },
+        
+                xAxis: {
+                    categories: [
+                        'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total Pengeluaran'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
+                },
+        
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br />',
+                    pointFormat: 'Total = {point.y}'
                 },
         
                 // Use the seriesData array to populate the series

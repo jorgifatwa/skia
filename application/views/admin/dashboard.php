@@ -121,6 +121,26 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<h4>Grafik Pengeluaran Perkaryawan Per Bulan</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="graph-section" id="container-grafik-pengeluaran-perkaryawan">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -134,6 +154,26 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="graph-section" id="container-grafik-pendapatan-pertahun">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<h4>Grafik Jumlah Pax Keberangkatan</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="graph-section" id="container-grafik-jumlah-pax">
 							</div>
 						</div>
 					</div>
