@@ -61,16 +61,18 @@ class Dashboard extends Admin_Controller {
 		'YEAR(tanggal)' => $currentYear, 'status' => 'Lunas'));
 
 		$total_biaya_tambahan = 0;
+		$total_biaya_tambahan_kotor = 0;
 		if(!empty($biaya_tambahan)){
 			foreach ($biaya_tambahan as $key => $value) {
 				$total_biaya_tambahan += $value->fee;
+				$total_biaya_tambahan_kotor += $value->harga * $value->jumlah;
 			}
 		}
 		
-		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan);
+		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan + $total_biaya_tambahan_kotor);
 		$this->data['total_pengeluaran'] = "Rp. ".number_format($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan);
 		$this->data['total_pengeluaran_karyawan'] = "Rp. ".number_format($total_pengeluaran_karaywan);
-		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
+		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan + $total_biaya_tambahan_kotor) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
 
 
 		$this->load->view('admin/layouts/page', $this->data);
@@ -124,7 +126,7 @@ class Dashboard extends Admin_Controller {
 
 			// Calculate total income for the current month and year
 			$totalBiayaQuery = $this->db->query("
-				SELECT SUM(harga * jumlah) AS total_pendapatan
+				SELECT SUM(fee) AS total_pendapatan, SUM(harga * jumlah) AS total_pendapatan_kotor
 				FROM biaya_tambahan
 				WHERE status = 'Lunas'
 				AND is_deleted = 0
@@ -134,8 +136,9 @@ class Dashboard extends Admin_Controller {
 
 			$totalBiayaResult = $totalBiayaQuery->row();
 			$totalBiaya = $totalBiayaResult->total_pendapatan;
+			$totalBiayaKotor = $totalBiayaResult->total_pendapatan_kotor;
 
-			$totalPendapatan = $totalPendapatan + $totalBiaya;
+			$totalPendapatan = $totalPendapatan + $totalBiaya + $totalBiayaKotor;
 			// Calculate net income for the current month
 			$totalBersih = $totalPendapatan - ($totalPengeluaran + $totalPengeluaranKaryawan + $totalFeeTl);
 
