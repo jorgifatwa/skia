@@ -86,7 +86,7 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
-						<h4>Grafik Pengeluaran Operasional / UOB Per Bulan</h4>
+						<h4>Grafik Pengeluaran Operasional / MOB Per Bulan</h4>
 					</div>
 				</div>
 				<div class="card-body">

@@ -211,7 +211,7 @@ define([
                     type: 'column'
                 },
                 title: {
-                    text: 'Pengeluaran Operasional / UOB Perbulan'
+                    text: 'Pengeluaran Operasional / MOB Perbulan'
                 },
                 subtitle: {
                     text: 'SKIA'
@@ -257,7 +257,7 @@ define([
                 },
             
                 series: [{
-                    name: 'Total Pengeluaran Operasional / UOB',
+                    name: 'Total Pengeluaran Operasional / MOB',
                     data: totalPengeluaranArray,
                     pointStart: 0,
                 }]
