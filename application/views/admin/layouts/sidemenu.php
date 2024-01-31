@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="<?php echo base_url() ?>" class="brand-link">
-		<!-- <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="Belengkong Logo" class="brand-image" style="opacity: .8"> -->
+		<img src="<?php echo base_url() ?>assets/images/icon.png" alt="SKIA Logo" class="brand-image" style="opacity: .8; margin-left: 0px;">
 		<span class="brand-text font-weight-light">SKIA</span>
 	</a>
 
