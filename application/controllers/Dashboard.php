@@ -64,12 +64,16 @@ class Dashboard extends Admin_Controller {
 		$total_biaya_tambahan_kotor = 0;
 		if(!empty($biaya_tambahan)){
 			foreach ($biaya_tambahan as $key => $value) {
-				$total_biaya_tambahan += $value->fee;
-				$total_biaya_tambahan_kotor += $value->harga * $value->jumlah;
+				if($value->fee == 0){
+
+					$total_biaya_tambahan += $value->harga * $value->jumlah;
+				}else{
+					$total_biaya_tambahan += $value->fee;
+				}
 			}
 		}
 		
-		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan + $total_biaya_tambahan_kotor);
+		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan);
 		$this->data['total_pengeluaran'] = "Rp. ".number_format($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan);
 		$this->data['total_pengeluaran_karyawan'] = "Rp. ".number_format($total_pengeluaran_karaywan);
 		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan + $total_biaya_tambahan_kotor) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
@@ -134,11 +138,20 @@ class Dashboard extends Admin_Controller {
 				AND YEAR(tanggal) = $currentYear
 			");
 
-			$totalBiayaResult = $totalBiayaQuery->row();
-			$totalBiaya = $totalBiayaResult->total_pendapatan;
-			$totalBiayaKotor = $totalBiayaResult->total_pendapatan_kotor;
+			$biaya_tambahan = $this->biaya_tambahan_model->getAllById(array('MONTH(tanggal)' => $month,
+			'YEAR(tanggal)' => $currentYear, 'status' => 'Lunas'));
+			$totalBiaya = 0;
+			if(!empty($biaya_tambahan)){
+				foreach ($biaya_tambahan as $key => $value) {
+					if($value->fee == 0){
+						$totalBiaya += $value->harga * $value->jumlah;
+					}else{
+						$totalBiaya += $value->fee;
+					}
+				}
+			}
 
-			$totalPendapatan = $totalPendapatan + $totalBiaya + $totalBiayaKotor;
+			$totalPendapatan = $totalPendapatan + $totalBiaya;
 			// Calculate net income for the current month
 			$totalBersih = $totalPendapatan - ($totalPengeluaran + $totalPengeluaranKaryawan + $totalFeeTl);
 
