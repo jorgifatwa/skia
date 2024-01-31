@@ -174,7 +174,12 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor'
+                        text: 'Jumlah Pendapatan Kotor (jt IDR)' // Update the yAxis title
+                    },
+                    labels: {
+                        formatter: function () {
+                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
+                        }
                     }
                 },
                 plotOptions: {
@@ -185,9 +190,9 @@ define([
             
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pendapatan = {point.y}'
+                    pointFormat: 'Pendapatan = Rp. {point.y}'
                 },
-            
+    
                 series: [{
                     name: 'Total Pendapatan Kotor',
                     data: totalPendapatanArray,
@@ -232,7 +237,12 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pengeluaran Operasional / UOB'
+                        text: 'Jumlah Pengeluaran Operasional / MOB (IDR)' // Update the yAxis title
+                    },
+                    labels: {
+                        formatter: function () {
+                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
+                        }
                     }
                 },
                 plotOptions: {
@@ -243,7 +253,7 @@ define([
             
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pengeluaran = {point.y}'
+                    pointFormat: 'Pengeluaran = Rp. {point.y}'
                 },
             
                 series: [{
@@ -336,7 +346,12 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pengeluaran Karyawan'
+                        text: 'Jumlah Pengeluaran Karyawan (IDR)' // Update the yAxis title
+                    },
+                    labels: {
+                        formatter: function () {
+                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
+                        }
                     }
                 },
                 plotOptions: {
@@ -347,7 +362,7 @@ define([
             
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pengeluaran = {point.y}'
+                    pointFormat: 'Pengeluaran = Rp. {point.y}'
                 },
             
                 series: [{
@@ -392,7 +407,12 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor'
+                        text: 'Jumlah Pendapatan Kotor (IDR)' // Update the yAxis title
+                    },
+                    labels: {
+                        formatter: function () {
+                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
+                        }
                     }
                 },
                 plotOptions: {
@@ -403,7 +423,7 @@ define([
         
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pendapatan = {point.y}'
+                    pointFormat: 'Pendapatan = Rp. {point.y}'
                 },
         
                 series: [
@@ -565,7 +585,12 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Total Pengeluaran'
+                        text: 'Total Pengeluaran (IDR)' // Update the yAxis title
+                    },
+                    labels: {
+                        formatter: function () {
+                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
+                        }
                     }
                 },
                 plotOptions: {
@@ -576,7 +601,7 @@ define([
         
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Total = {point.y}'
+                    pointFormat: 'Total = Rp. {point.y}'
                 },
         
                 // Use the seriesData array to populate the series
