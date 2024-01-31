@@ -28,6 +28,7 @@ class Biaya_tambahan extends Admin_Controller
 				'tanggal' => $this->input->post('tanggal'),
 				'flight' => $this->input->post('flight'),
 				'harga' => str_replace('.', '', $this->input->post('harga')),
+				'fee' => str_replace('.', '', $this->input->post('fee')),
 				'jumlah' => str_replace('.', '', $this->input->post('jumlah')),
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
@@ -54,6 +55,7 @@ class Biaya_tambahan extends Admin_Controller
 		$this->form_validation->set_rules('tanggal', "Tanggal Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('flight', "light Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('harga', "Harga Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('fee', "Fee Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('jumlah', "Jumlah Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('status', "Status Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('keterangan', "Keterangan Harus Diisi", 'trim|required');
@@ -63,6 +65,7 @@ class Biaya_tambahan extends Admin_Controller
 				'tanggal' => $this->input->post('tanggal'),
 				'flight' => $this->input->post('flight'),
 				'harga' => str_replace('.', '', $this->input->post('harga')),
+				'fee' => str_replace('.', '', $this->input->post('fee')),
 				'jumlah' => str_replace('.', '', $this->input->post('jumlah')),
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
@@ -91,6 +94,7 @@ class Biaya_tambahan extends Admin_Controller
 				$this->data['flight'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->flight : "";
 				$this->data['harga'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->harga : "";
 				$this->data['jumlah'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->jumlah : "";
+				$this->data['fee'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->fee : "";
 				$this->data['keterangan'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->keterangan : "";
 				$this->data['status'] 	= (!empty($biaya_tambahan)) ? $biaya_tambahan[0]->status : "";
 				$this->data['content'] = 'admin/biaya_tambahan/edit_v';
@@ -107,9 +111,10 @@ class Biaya_tambahan extends Admin_Controller
 			1 => 'flight',
 			2 => 'harga',
 			3 => 'jumlah',
-			4 => 'status',
-			5 => 'keterangan',
-			6 => '',
+			4 => 'fee',
+			5 => 'status',
+			6 => 'keterangan',
+			7 => '',
 		);
 
 		$order = $columns[$this->input->post('order')[0]['column']];
@@ -127,6 +132,7 @@ class Biaya_tambahan extends Admin_Controller
 				"biaya_tambahan.flight" => $search_value,
 				"biaya_tambahan.harga" => $search_value,
 				"biaya_tambahan.jumlah" => $search_value,
+				"biaya_tambahan.fee" => $search_value,
 				"biaya_tambahan.status" => $search_value,
 				"biaya_tambahan.keterangan" => $search_value,
 			);
@@ -161,6 +167,7 @@ class Biaya_tambahan extends Admin_Controller
 				$nestedData['flight'] = $data->flight;
 				$nestedData['tanggal'] = $data->tanggal;
 				$nestedData['harga'] = "Rp. ".number_format($data->harga);
+				$nestedData['fee'] = "Rp. ".number_format($data->fee);
 				$nestedData['jumlah'] = number_format($data->jumlah);
 				$total = $data->harga * $data->jumlah;
 				$nestedData['status'] = $data->status;

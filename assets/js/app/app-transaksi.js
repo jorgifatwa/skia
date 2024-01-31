@@ -166,6 +166,11 @@ define([
                 $(this).val(value);
             });
 
+            $('#fee').keyup(function (event) {
+                var value = formatRupiah($(this).val());
+                $(this).val(value);
+            });
+
             function getNumericValue(inputText) {
                 let result = inputText.replace(/[^\d]/g, ''); // Remove everything except digits
                 let integerValue = parseFloat(result); // Convert the result to an integer
@@ -202,10 +207,13 @@ define([
                         harga: {
                             required: true
                         },
+                        fee: {
+                            required: true
+                        },
                         jumlah: {
                             required: true
                         },
-                        fee_tl: {
+                        fee: {
                             required: true
                         },
                         keterangan: {
@@ -225,8 +233,8 @@ define([
                         harga: {
                             required: "Harga Harus Diisi"
                         },
-                        fee_tl: {
-                            required: "Fee TL Harus Diisi"
+                        fee: {
+                            required: "Fee Harus Diisi"
                         },
                         jumlah: {
                             required: "Jumlah Harus Diisi"
@@ -442,6 +450,7 @@ define([
                     { "data": "flight" },
                     { "data": "harga" },
                     { "data": "jumlah" },
+                    { "data": "fee" },
                     { "data": "keterangan"},
                     { "data": "status"},
                     { "data": "action" ,"orderable": false}
@@ -471,6 +480,9 @@ define([
                         flight: {
                             required: true
                         },
+                        fee_tl: {
+                            required: true
+                        },
                         keterangan_tambahan: {
                             required: true
                         },
@@ -493,6 +505,9 @@ define([
                         },
                         jumlah_pax: {
                             required: "Jumlah Pax Harus Diisi"
+                        },
+                        fee_tl: {
+                            required: "Fee TL Pax Harus Diisi"
                         },
                         flight: {
                             required: "Flight Pax Harus Diisi"
@@ -587,12 +602,14 @@ define([
                     $('#tanggal').val(data.tanggal);
                     $('#harga').val(formatRupiah(data.harga));
                     $('#jumlah_pax').val(formatRupiah(data.jumlah));
+                    $('#fee').val(formatRupiah(data.fee));
                     $('#keterangan').val(data.keterangan);
                     $("#status").val(data.status).trigger("change"); 
                     $('#id').val(data.id);
 
                     var input_harga = $('#harga').val();
                     var input_jumlah = $('#jumlah_pax').val();
+                    var input_fee = $('#fee').val();
                     var jumlah_pax = getNumericValue(input_jumlah);
                     var harga = getNumericValue(input_harga);
                     

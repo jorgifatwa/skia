@@ -63,11 +63,11 @@ class Dashboard extends Admin_Controller {
 		$total_biaya_tambahan = 0;
 		if(!empty($biaya_tambahan)){
 			foreach ($biaya_tambahan as $key => $value) {
-				$total_biaya_tambahan += $value->harga * $value->jumlah;
+				$total_biaya_tambahan += $value->fee;
 			}
 		}
 		
-		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan + $total_fee_tl);
+		$this->data['total_pendapatan'] = "Rp. ".number_format($total + $total_biaya_tambahan);
 		$this->data['total_pengeluaran'] = "Rp. ".number_format($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan);
 		$this->data['total_pengeluaran_karyawan'] = "Rp. ".number_format($total_pengeluaran_karaywan);
 		$this->data['total_bersih'] = "Rp. ".number_format(($total + $total_biaya_tambahan) - ($total_pengeluaran + $total_fee_tl + $total_pengeluaran_karaywan));
@@ -86,8 +86,16 @@ class Dashboard extends Admin_Controller {
 		// Loop through each month (from January to December)
 		for ($month = 1; $month <= 12; $month++) {
 			// Calculate total income for the current month and year
+			// $totalPendapatanQuery = $this->db->query("
+			// 	SELECT SUM(harga * jumlah_pax) AS total_pendapatan
+			// 	FROM transaksi
+			// 	WHERE status = 0
+			// 	AND MONTH(tanggal_keberangkatan) = $month
+			// 	AND YEAR(tanggal_keberangkatan) = $currentYear
+			// ");
+
 			$totalPendapatanQuery = $this->db->query("
-				SELECT SUM((harga * jumlah_pax) + fee_tl) AS total_pendapatan, SUM(fee_tl) as total_fee_tl
+				SELECT SUM(harga * jumlah_pax) AS total_pendapatan
 				FROM transaksi
 				WHERE status = 0
 				AND MONTH(tanggal_keberangkatan) = $month
@@ -96,7 +104,7 @@ class Dashboard extends Admin_Controller {
 
 			$totalPendapatanResult = $totalPendapatanQuery->row();
 			$totalPendapatan = $totalPendapatanResult->total_pendapatan;
-			$totalFeeTl = $totalPendapatanResult->total_fee_tl;
+			$totalFeeTl = 0;
 
 			// Calculate total expenditure for the current month and year
 			$totalPengeluaranQuery = $this->db->query("

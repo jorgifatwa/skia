@@ -251,6 +251,10 @@
               <input type="text" class="form-control" id="jumlah_pax" name="jumlah" placeholder="Masukkan Jumlah">
             </div>
             <div class="form-group">
+              <label for="fee">Fee</label>
+              <input type="text" class="form-control" id="fee" name="fee" placeholder="Masukkan Fee">
+            </div>
+            <div class="form-group">
               <label for="total">Total Keseluruhan</label>
               <input type="text" class="form-control" id="total_keseluruhan" name="total_keseluruhan" placeholder="Masukkan Total Keluruhan" readonly>
             </div>
@@ -287,6 +291,7 @@
                   <th>Flight</th>
                   <th>Harga</th>
                   <th>Jumlah</th>
+                  <th>Fee</th>
                   <th>Keterangan</th>
                   <th>Status</th>
                   <th>Aksi</th>
