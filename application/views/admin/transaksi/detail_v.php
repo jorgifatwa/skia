@@ -189,7 +189,7 @@
         <div class="col-md-5 m-4">
           <p class="m-0"><b>Pembayaran pada rekening:</b></p>
           <p class="m-0"><b>Transfer via <?= $nama_bank ?></b></p>
-          <p class="m-0"><b><?= $no_rekening ?></b></p>
+          <p class="m-0"><b><?= $no_rekening ?> A/N <?= $this->data['users']->first_name ?></b></p>
           <p class="m-0"><b>Pembayaran via Transfer dinyatakan <?= $status ?></b></p>
           <p class="m-0"><b>Setelah disertai bukti transfer</b></p>
         </div>
