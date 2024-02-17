@@ -40,6 +40,11 @@ define([
                 placeholder: "Pilih Status",
             });  
 
+            $('#bulan').select2({
+                width: "100%",
+                placeholder: "Pilih Bulan",
+            });  
+
             var harga = $('#harga').val();
             var jumlah_pax = $('#jumlah_pax').val();
             var fee_tl = $('#fee_tl').val();
@@ -456,6 +461,25 @@ define([
                     { "data": "action" ,"orderable": false}
                 ]
             });
+
+            $('#btn-cari').on('click', function () {
+                var bulan = $("#bulan").val();
+                var travel_id = $("#travel_id").val();
+
+                App.table_transaksi.column(0).search(bulan,true,true);
+                App.table_transaksi.column(2).search(travel_id,true,true);
+
+                App.table_transaksi.draw();
+
+                App.bulan = $('#bulan').val();
+                App.travel_id = $('#travel_id').val();
+            })
+            $('#btn-reset').on('click', function () {
+                $("#bulan").val('').trigger('change');  // Clear and trigger change for Select2
+                $("#travel_id").val('').trigger('change');  // Clear and trigger change for Select2
+
+                App.table_transaksi.search( '' ).columns().search( '' ).draw();
+            })
         },
         initValidation : function(){
             if($("#form").length > 0){

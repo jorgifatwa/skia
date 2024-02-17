@@ -396,6 +396,23 @@ class Transaksi extends Admin_Controller
 			$this->data['content'] = 'errors/html/restrict';
 		}
 
+		$bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            );
+
+		$this->data['bulan'] = $bulan;
+		$this->data['travels'] = $this->travel_model->getAllById();
+
 		$this->load->view('admin/layouts/page', $this->data);
 	}
 
@@ -404,7 +421,7 @@ class Transaksi extends Admin_Controller
 		$columns = array(
 			0 => 'tanggal_keberangkatan',
 			1 => 'no_flight',
-			2 => 'nama_travel',
+			2 => 'travel_id',
 			3 => 'harga',
 			4 => 'jumlah_pax',
 			5 => 'status',
@@ -420,21 +437,43 @@ class Transaksi extends Admin_Controller
 		$limit = 0;
 		$start = 0;
 		$totalData = $this->transaksi_model->getCountAllByTransaksi($limit, $start, $search, $order, $dir, $where);
+		$searchColumn = $this->input->post('columns');
+		$filtered = false;
+
+		if(!empty($searchColumn[0]['search']['value'])){
+			$value = $searchColumn[0]['search']['value'];
+			$where['MONTH(tanggal_keberangkatan) = '] = $value;
+
+			$filtered = true;
+		}
+
+		if(!empty($searchColumn[2]['search']['value'])){
+			$value = $searchColumn[2]['search']['value'];
+			$where['transaksi.travel_id'] = $value;
+
+			$filtered = true;
+		}
 
 		if (!empty($this->input->post('search')['value'])) {
 			$search_value = $this->input->post('search')['value'];
 			$search = array(
 				"transaksi.tanggal_keberangkatan" => $search_value,
 				"transaksi.no_flight" => $search_value,
-				"travel.nama" => $search_value,
+				"travel.id" => $search_value,
 				"transaksi.harga" => $search_value,
 				"transaksi.jumlah_pax" => $search_value,
 				"transaksi.status" => $search_value,
 				"transaksi.keterangan" => $search_value,
 				"users.first_name" => $search_value,
 			);
-			$totalFiltered = $this->transaksi_model->getCountAllByTransaksi($limit, $start, $search, $order, $dir, $where);
-		} else {
+			$filtered = true;
+		}
+
+
+		if($filtered){
+			$totalFiltered = $this->transaksi_model->getCountAllByTransaksi($limit,$start,$search,$order,$dir, $where); 
+
+		}else{
 			$totalFiltered = $totalData;
 		}
 

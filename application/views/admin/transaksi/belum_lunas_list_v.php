@@ -19,10 +19,33 @@
   <div class="container-fluid">
     <div class="card mb-3">
         <div class="card-header">
-            <div class="row">
-                <div class="col-sm-12 text-right">
+            <h3>Filter</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="">Bulan</label>
+                  <select name="bulan" id="bulan" class="form-control">
+                  <option value=""></option>
+                    <?php foreach ($bulan as $key => $bulan) { ?>
+                      <option value="<?= $key ?>"><?= $bulan ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
-            </div>
+                <div class="col-sm-6">
+                  <label for="">Travel</label>
+                  <select name="travel_id" id="travel_id">
+                      <option value=""></option>
+                    <?php foreach ($travels as $key => $travel) { ?>
+                      <option value="<?= $travel->id ?>"><?= $travel->nama ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="row col-md-12 mt-3 mr-0">
+                <div class="col-md-12">
+                  <button id="btn-cari" style="margin-right: -23px !important" class="btn float-right col-md-1 btn-lg btn-primary">Cari</button>
+                  <button id="btn-reset" class="btn mr-2 float-right col-md-1 btn-lg btn-danger">Reset</button>
+                </div>
+              </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
