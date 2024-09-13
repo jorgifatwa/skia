@@ -30,7 +30,7 @@
         <div class="login-illustration h-100">
           <div class="login-flex mt-5">
             <img src="<?php echo base_url();?>assets/images/sky-jablay.png" style="width: 600px;">
-            <h5 class="greeting" style="margin-top: -50px">Selamat Datang di <br><span>Aplikasi Pengelolaan Keuangan SKIA</span></h5>
+            <!-- <h5 class="greeting" style="margin-top: -50px">Selamat Datang di <br><span>Aplikasi Pengelolaan Keuangan SKIA</span></h5> -->
             <!-- <div class="text-center"><button type="button" class="btn btn-darkblue" data-toggle="modal" data-target="#exampleModal">Help</button></div> -->
           </div>
         </div>

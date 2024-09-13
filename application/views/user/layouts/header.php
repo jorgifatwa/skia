@@ -1,14 +1,33 @@
-<head>
-  <title>BAPPEDA JABAR </title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/slick/slick-theme.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/bootstrap4/css/bootstrap.css"> 
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fonts/font-awesome/css/font-awesome.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/fonts/productsans.css"> 
-</head>
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Sky Khatulistiwa</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="<?php echo base_url() ?>assets/user/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/user/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="<?php echo base_url() ?>assets/user/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="<?php echo base_url() ?>assets/user/css/style.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    </head>

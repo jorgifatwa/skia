@@ -1,50 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadowed bg-light sticky-top">
-  <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url();?>">
-        <img src="<?php echo base_url();?>assets/img/logo-home.png">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
+<body>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url();?>">Beranda</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Air Minum
-              </a>
-              <div class="dropdown-menu dropdown-menu-right  animate slideIn" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url();?>target">Target & capaian air minum</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Jaringan perpipaan</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Bukan jaringan perpipaan</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Aman</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Air Limbah Domestik
-              </a>
-              <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url();?>target">Target & capaian sanitasi</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Sanitasi layak</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Sanitasi belum layak</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Sanitasi aman</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Persampahan
-              </a>
-              <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url();?>target">Target & capaian persampahan</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Penanganan</a>
-                  <a class="dropdown-item" href="<?php echo base_url();?>detail">Pengurangan</a>
-              </div>
-            </li>
-        </ul>
-      </div>
-    </div>
-</nav>
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
+            <div class="row gx-0">
+                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a href="#"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <!-- <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i></h1> -->
+                    <img src="<?php echo base_url() ?>assets/user/img/sky-logo.png" class="logo" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="<?php echo base_url() ?>" class="nav-item nav-link active">Home</a>
+                        <a href="#about" class="nav-item nav-link">Tentang Kami</a>
+                        <a href="#services" class="nav-item nav-link">Pelayanan</a>
+                        <a href="#skia" class="nav-item nav-link">SKIA</a>
+                        <a href="#kegiatan" class="nav-item nav-link">Kegiatan</a>
+                        <a href="#galeri" class="nav-item nav-link">Galeri</a>
+                        <a href="#reservasi" class="nav-item nav-link">Reservasi</a>
+                        <a href="#testimoni" class="nav-item nav-link">Testimoni</a>
+                    </div>
+                </div>
+            </nav>
+        </div>

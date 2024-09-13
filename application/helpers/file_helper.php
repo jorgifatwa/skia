@@ -99,26 +99,9 @@ function uploadFileArray($file_name, $location_path,$prefix_file,$type)
    
             if($CI->upload->do_upload('file')){
                 $upload_data = $CI->upload->data();
-                if ($type == 1) {
-                    $config_thumb['image_library']      = 'gd2';
-                    $config_thumb['source_image']       = $location_path.$config['file_name'];
-                    $config_thumb['new_image']          = $location_path;
-                    $config_thumb['maintain_ratio']     = TRUE;
-                    $config_thumb['create_thumb']       = TRUE;
-                    $config_thumb['thumb_marker']       = '_thumb';
-                    $config_thumb['width']              = 100;
-
-                    $CI->load->library('image_lib');
-                    $CI->image_lib->initialize($config_thumb);
-                    if ($CI->image_lib->resize() == true) {
-                        $return_file_thumb = $upload_data['raw_name']."_thumb".$upload_data['file_ext'];
-                    }
-                } else {
-                    $return_file_thumb = "";
-                }
+                $return_file_thumb = "";
 
                 $return[$i]["file"] = $upload_data['file_name'];
-                $return[$i]["file_thumb"] = $return_file_thumb;
             }else{
                 $return[$i]["file"] = "";
                 $return[$i]["file_thumb"] = "";
